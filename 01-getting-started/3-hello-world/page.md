@@ -3,16 +3,16 @@ title: Hello World
 status: live
 ---
 
-Instantiate a Slim application:
+Eine Instanz von Slim erstellen:
 
     $app = new \Slim\Slim();
 
-Define a HTTP GET route:
+Eine HTTP GET Route definieren:
 
     $app->get('/hello/:name', function ($name) {
         echo "Hello, $name";
     });
 
-Run the Slim application:
+Die Slim-Anwendung ausführen:
 
     $app->run();
