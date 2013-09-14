@@ -3,19 +3,19 @@ title: Response Cookies
 status: live
 ---
 
-The Slim application provides helper methods to send cookies with the HTTP response.
+Die Slim application stellt Helper Methoden bereit, um Cookies mit dem HTTP Response mitzusenden.
 
-### Set Cookie
+### Cookie setzen
 
-This example demonstrates how to use the Slim application’s `setCookie()` method to create an HTTP cookie to be sent
-with the HTTP response:
+Das folgende Beispiel demonstriert, wie mit Hilfe der `setCookie()` Methode ein HTTP Cookie erzeugt werden kann,
+das dann mit dem HTTP Response mitgesendet wird.
 
     <?php
     $app->setCookie('foo', 'bar', '2 days');
 
-This creates an HTTP cookie with the name "foo" and value "bar" that expires two days from now. You may also provide
-additional cookie properties, including its path, domain, secure, and httponly settings. The Slim application’s
-`setCookie()` method uses the same signature as PHP’s native `setCookie()` function.
+Das Beispiel erzeugt ein HTTP Cookie mit dem Namen "foo" und dem Inhalt "bar", das in zwei Tagen ab sofort abläuft.
+Es können außerdem zusätzliche Cookie Eigenschaften (z.B. Pfad, Domain, Secure, httponly) bereitgestellt werden.
+Die `setCookie()` Methode von Slim benutzt dieselbe Signatur wie die native `setCookie()` Funktion von PHP.
 
     <?php
     $app->setCookie(
@@ -28,13 +28,12 @@ additional cookie properties, including its path, domain, secure, and httponly s
         $httponly
     );
 
-### Set Encrypted Cookie
+### Ein verschlüsseltes Cookie setzen
 
-You can tell Slim to encrypt the response cookies by setting the app's `cookies.encrypt` setting to `true`.
-When this setting is `true`, Slim will encrypt the response cookies automatically before they are returned to
-the HTTP client.
+Um den Response eines Cookies zu verschlüsseln, muss die Slim Eigenschaft `cookies.encrypt` auf `true` gesetzt werden.
+Ist dieser Wert `true`, wird Slim den Response des Cookies automatisch vor Auslieferung an den Client verschlüsseln.
 
-Here are the available Slim app settings used for cookie encryption:
+Folgende Einstellungen für die Verschlüsselung von Cookies stehen zur Verfügung:
 
     <?php
     $app = new \Slim\Slim(array(
@@ -44,21 +43,21 @@ Here are the available Slim app settings used for cookie encryption:
         'cookies.cipher_mode' => MCRYPT_MODE_CBC
     ));
 
-### Delete Cookie
+### Cookie löschen
 
-You can delete a cookie using the Slim application’s `deleteCookie()` method. This will remove the cookie from
-the HTTP client before the next HTTP request. This method accepts the same signature as the Slim application’s
-`setCookie()` instance method, *without* the `$expires` argument. Only the first argument is required.
+Ein Cookie kann mit Hilfe der `deleteCookie()` Methode gelöscht werden. Das Cookie wird so vor dem nächsten HTTP Request
+beim Client gelöscht. Die Methode akzeptiert dieselbe Signatur wie die `setCookie()` Instanzmethode, allerdings *ohne* das `$expires`
+Argument. Lediglich das erste Argument ist benötigt.
 
     <?php
     $app->deleteCookie('foo');
 
-If you need to also specify the path and domain:
+Muss zusätzlich der Pfad und die Domain angegeben werden:
 
     <?php
     $app->deleteCookie('foo', '/', 'foo.com');
 
-You may also further specify the secure and httponly properties:
+Außerdem können die secure und httponly Eigenschaften übergeben werden:	
 
     <?php
     $app->deleteCookie('foo', '/', 'foo.com', true, true);
