@@ -1,18 +1,18 @@
 ---
-title: Custom Views
+title: Benutzerdefinierte Views
 status: live
 ---
 
-A Slim application delegates rendering of templates to its view object. A custom view is a subclass
-of `\Slim\View` that implements this interface:
+Eine Slim Applikation delegiert das Rendern der Templates an sein View Objekt. Eine Slim View ist eine Subklasse
+von `Slim\View` und implementiert dieses Interface:
 
     <?php
     public render(string $template);
 
-The view object's `render` method must return the rendered content of the template specified by its
-`$template` argument. When the custom view’s render method is invoked, it is passed the desired template
-pathname (relative to the Slim application's “templates.path” setting) as its argument. Here's an example
-custom view:
+Die `render()` Methode muss den gerenderten Content des entsprechenden Templates (spezifiziert durch `$template`)
+zurückliefern. Wird die `render` Methode der benutzerdefinierten View aufgerufen, wird dieser der verlangte Pfadname
+(Relativ zur “templates.path” Einstellung der Slim Applikation) des Templates als Argument übergeben.
+Folgend ein Beispiel einer benutzerdefinierten View:
 
     <?php
     class CustomView extends \Slim\View
@@ -23,18 +23,19 @@ custom view:
         }
     }
 
-The custom view can do whatever it wants internally so long as it returns the template’s rendered output as a string.
-A custom view makes it easy to integrate popular PHP template systems like Twig or Smarty.
+Die benutzerdefinierte View kann eine beliebige interne Funktionalität enthalten. Sie muss lediglich den gerenderten
+Content des Templates als String zurückliefern. Eine benutzerdefinierte View vereinfacht die Integration von populären
+PHP Templatesystemen wie Twig oder Smarty.
 
 <div class="alert alert-info">
     <strong>Heads Up!</strong> A custom view may access data passed to it by the Slim application’s
     <code>render()</code> method with <code>$this->data</code>.
 </div>
 
-You can browse ready-to-use custom views that work with popular PHP template engines in the Slim-Extras repository
-on GitHub.
+Benutzerdefinierte "ready-to-use" Views, die mit den populären Templatesystemen von PHP zusammenarbeiten, finden sich auf Github
+im Slim-Extras Repository.
 
-### Example View
+### Beispiel View
 
     <?php
     class CustomView extends \Slim\View
@@ -46,10 +47,10 @@ on GitHub.
         }
     }
 
-### Example Integration
+### Beispiel Integration
 
-If the custom view is not discoverable by a registered autoloader, it must be required before the Slim application
-is instantiated.
+Kann die benutzerdefinierte View nicht von einem registrierten Autoloader gefunden werden, muss diese vor Instanzierung
+der Slim Applikation eingebunden (require) werden.
 
     <?php
     require 'CustomView.php';
