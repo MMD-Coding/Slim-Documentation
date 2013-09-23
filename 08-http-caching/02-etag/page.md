@@ -3,21 +3,22 @@ title: ETag
 status: live
 ---
 
-A Slim application provides built-in support for HTTP caching using ETags. An ETag is a unique identifier for a
-resource URI. When an ETag header is set with the Slim application's `etag()` method, the HTTP client will send
-an **If-None-Match** header with each subsequent HTTP request of the same resource URI. If the ETag value for the
-resource URI matches the **If-None-Match** HTTP request header, the Slim application will return a
-**304 Not Modified** HTTP response that will prompt the HTTP client to continue using its cache; this also prevents
-the Slim application from serving the entire markup for the resource URI, saving bandwidth and response time.
+Eine Slim Applikation bietet integrierte Unterstützung für HTTP Caching via ETag. Ein ETag ist ein eindeutiger
+Identifier für die URI einer Ressource. Wurde mit Hilfe der `etag()` Methode ein ETag Header gesetzt, sendet der HTTP
+Client bei jeder nachfolgenden Anfrage der entsprechenden URI einen **If-None-Match** Header mit. Stimmt der ETag
+mit dem angefragten ETag im **If-None-Match** Header überein, wird Slim einen **304 Not Modified** HTTP Response
+zurückliefern. Dieser HTTP Code weist den HTTP Client an, die Daten aus seinem Cache auszuliefern. Dieses Vorgehen
+spart Bandbreite und verkürzt die Antwortzeit der Anfrage.
 
-Setting an ETag with Slim is very simple. Invoke the Slim application's `etag()` method in your route callback,
-passing it a unique ID as the first and only argument.
+Das Setzen eines ETags mit Slim ist sehr einfach. In der Routen Callback Funktion muss lediglich die `etag()` Methode
+der Slim Applikation aufgerufen werden. Der einzige Parameter ist eine eindeutige ID.
 
     <?php
     $app->get('/foo', function () use ($app) {
-        $app->etag('unique-id');
-        echo "This will be cached after the initial request!";
+        $app->etag('eindeutige-id');
+        echo "Dieser String ist nach dem ersten Request gecached!";
     });
 
-That’s it. Make sure the ETag ID is unique for the given resource. Also make sure the ETag ID changes as your
-resource changes; otherwise, the HTTP client will continue serving its outdated cache.
+Das war's. Abschließend muss sichergestellt werden, dass der ETag pro Ressource eindeutig ist. Außerdem muss darauf geachtet
+werden, dass sich der ETag bei Änderung der Ressource ebenfalls ändern muss. Ansonsten kann es vorkommen, dass der HTTP
+Client abgelaufene Daten zurückliefert.

@@ -3,10 +3,10 @@ title: Rendering
 status: live
 ---
 
-You can use the Slim application’s `render()` method to ask the current view object to render a template with a
-given set of variables. The Slim application's `render()` method will `echo()` the output returned from the view
-object to be captured by an output buffer and appended automatically to the response object’s body. This assumes
-nothing about how the template is rendered; that is delegated to the view object.
+Um ein Template von der aktuellen View aus mit verschiedenen Variablen zu rendern, kann die `render()` Methode
+der Slim Applikation verwendet werden. Der von der `render()` Methode erzeugte Output der View wird von einem
+Output Buffer vorgehalten und automatisch an den Body des Response Objektes angehängt. Dieses Verhalten ändert
+nichts daran, wie das Template gerendert wird - es wird trotzdem an das View Objekt delegiert.
 
     <?php
     $app = new \Slim\Slim();
@@ -14,8 +14,8 @@ nothing about how the template is rendered; that is delegated to the view object
         $app->render('myTemplate.php', array('id' => $id));
     });
 
-If you need to pass data from the route callback into the view object, you must explicitly do so by passing an
-array as the second argument of the Slim application’s `render()` method like this:
+Sollen Daten aus der Callback Funktion der Route in eine View übergeben werden, müssen diese der Methode `render()` als
+zweitem Parameter und als Array übergeben werden. Beispiel:
 
     <?php
     $app->render(
@@ -23,7 +23,7 @@ array as the second argument of the Slim application’s `render()` method like 
         array( 'name' => 'Josh' )
     );
 
-You can also set the HTTP response status when you render a template:
+Außerdem kann beim Rendern eines Templates der HTTP Response Status gesetzt werden:
 
     <?php
     $app->render(

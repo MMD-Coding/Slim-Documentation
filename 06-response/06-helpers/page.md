@@ -3,18 +3,19 @@ title: Response Helpers
 status: live
 ---
 
-The response object provides helper methods to inspect and interact with the underlying HTTP response.
+Das Response Objekt stellt Helper Methoden bereit, die die Interaktion und Inspektion des darunterliegenden HTTP
+Response vereinfachen.
 
 ### Finalize
 
-The response object’s `finalize()` method returns a numeric array of `[status, header, body]`. The status is
-an integer; the header is an iterable data structure; and the body is a string. Were you to create a new
-`\Slim\Http\Response` object in your Slim application or its middleware, you would call the response object's
-`finalize()` method to produce the status, header, and body for the underlying HTTP response.
+Die `finalize()` Methode des Response Objektes liefert ein numerisches Array von `[status, header, body]`. Der Status
+ist ein Integer-Wert, der Header eine iterierbare Datenstruktur und der Body ein String. Um Status, Header und Body
+für den darunterliegenden HTTP Response zu erzeugen, muss die `finalize()` Methode an der Stelle aufgerufen werden, an der ein
+`Slim\Http\Response` Objekt generiert wird (z.B. Slim application oder Middleware).
 
     <?php
     /**
-     * Prepare new response object
+     * Neues Response Objekt vorbereiten
      */
     $res = new \Slim\Http\Response();
     $res->setStatus(400);
@@ -33,43 +34,43 @@ an integer; the header is an iterable data structure; and the body is a string. 
 
 ### Redirect
 
-The response object’s `redirect()` method will set the response status and its **Location:** header needed to
-return a **3xx Redirect** response.
+Um einen **3xx Redirect** Header zu setzen, müssen der `redirect()` Methode des Response Objektes der Status
+und die **Location:** übergeben werden.
 
     <?php
     $app->response->redirect('/foo', 303);
 
-### Status Introspection
+### Status Selbstprüfung
 
-The response object provides other helper methods to inspect its current status. All of the following methods
-return a boolean value:
+Das Response Objekt stellt weitere Helper Methoden zur Verfügung, um den aktuellen Status au überprüfen.
+Alle folgenden Werte liefern einen booleschen Wert zurück.
 
     <?php
     $res = $app->response;
 
-    //Is this an informational response?
+    //Ist es ein informativer Response?
     $res->isInformational();
 
-    //Is this a 200 OK response?
+    //Ist es ein 200 OK Response?
     $res->isOk();
 
-    //Is this a 2xx successful response?
+    //Ist es ein erfolgreicher 2xx Response?
     $res->isSuccessful();
 
-    //Is this a 3xx redirection response?
+    //Ist es ein 3xx Weiterleitungs Response?
     $res->isRedirection();
 
-    //Is this a specific redirect response? (301, 302, 303, 307)
+    //Ist es ein spezifischer Weiterleitungs Response? (301, 302, 303, 307)
     $res->isRedirect();
 
-    //Is this a forbidden response?
+    //Ist es ein verbotener Response?
     $res->isForbidden();
 
-    //Is this a not found response?
+    //Ist es ein "not found" Response?
     $res->isNotFound();
 
-    //Is this a client error response?
+    //Ist es ein "client error" Response?
     $res->isClientError();
 
-    //Is this a server error response?
+    //Ist es ein "server error" Response?
     $res->isServerError();

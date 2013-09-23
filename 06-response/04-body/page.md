@@ -3,8 +3,9 @@ title: Response Body
 status: live
 ---
 
-The HTTP response returned to the client will have a body. The HTTP body is the actual content of the HTTP response
-delivered to the client. You can use the Slim application’s response object to set the HTTP response’s body:
+Der HTTP Response, der an den Client gesendet wird, besitzt einen Body. Der HTTP Body ist der eigentliche Content,
+der an den Client ausgeliefert wird. Du kannst das Slim application Response Objekt benutzen, um den Body des HTTP
+Response zu bearbeiten:
 
     <?php
     $app = new \Slim\Slim();
@@ -15,15 +16,14 @@ delivered to the client. You can use the Slim application’s response object to
     // Append response body
     $app->response->write('Bar');
 
-When you overwrite or append the response object’s body, the response object will automatically set the
-**Content-Length** header based on the bytesize of the new response body.
+Wenn Du den Body überschreibst oder etwas anhängst, wird die **Content-Length** automatisch auf die Größe der Bytes des
+aktuellen gesetzten Response Body gesetzt.
 
-You can fetch the response object’s body like this:
+Du erhälst den Body des Response Objektes folgendermaßen:
 
     <?php
     $body = $app->response->getBody();
 
-Usually, you will never need to manually set the response body with the `setBody()` or `write()` methods; instead,
-the Slim app will do this for you. Whenever you `echo()` content inside a route's callback function, the
-`echo()`’d content is captured in an output buffer and appended to the response body before the HTTP response
-is returned to the client.
+Normalerweise muss der Response Body nie mit Hilfe der Methoden `setBody()` oder `write()` gesetzt werden. Dies übernimmt
+die Slim App automatisch. Wann immer Du innerhalb einer Routen Callback Funktion content via `echo()` ausgibst, wird der
+ausgegebene Content in einem Output Buffer gehalten und an den Response Body, der an den Client gesendet wird, angehängt.
