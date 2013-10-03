@@ -1,4 +1,4 @@
 ---
-title: Configuration
+title: Konfiguration
 status: live
 ---
